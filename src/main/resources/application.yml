@@ -8,3 +8,13 @@ spring:
     username: post
     password: postgr
     driverClassName: org.postgresql.Driver
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    ru.worldmac.wmbot: debug
+
+#javarush:
+#  api:
+#    path: https://javarush.ru/api/1.0/rest

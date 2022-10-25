@@ -1,0 +1,1329 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact": {},
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "host": "javarush.ru",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "forum-question-controller",
+      "description": "Forum Question Controller"
+    },
+    {
+      "name": "group-controller",
+      "description": "Group Controller"
+    },
+    {
+      "name": "post-controller",
+      "description": "Post Controller"
+    }
+  ],
+  "paths": {
+    "/api/1.0/rest/forum": {
+      "get": {
+        "tags": [
+          "forum-question-controller"
+        ],
+        "summary": "Get forum questions by filters",
+        "operationId": "getForumQuestionsUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "filter",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ALL",
+              "MY",
+              "FRIENDS"
+            ]
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "status",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "NEW",
+              "ACTIVE",
+              "SOLVED",
+              "ARCHIVE",
+              "DUPLICATE"
+            ]
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "order",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "NEW",
+              "OLD",
+              "POPULAR",
+              "RELEVANCE"
+            ]
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "offset",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ForumQuestionInfo"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/forum/count": {
+      "get": {
+        "tags": [
+          "forum-question-controller"
+        ],
+        "summary": "Get forum questions count by filters",
+        "operationId": "getForumQuestionsCountUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "filter",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ALL",
+              "MY",
+              "FRIENDS"
+            ]
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "status",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "NEW",
+              "ACTIVE",
+              "SOLVED",
+              "ARCHIVE",
+              "DUPLICATE"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/forum/{KID}": {
+      "get": {
+        "tags": [
+          "forum-question-controller"
+        ],
+        "summary": "Get forum question by key or id",
+        "operationId": "getForumQuestionUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "KID",
+            "in": "path",
+            "description": "KID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ForumQuestionInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/groups": {
+      "get": {
+        "tags": [
+          "group-controller"
+        ],
+        "summary": "Get groups by filters",
+        "operationId": "getGroupsListUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "CITY",
+              "COMPANY",
+              "COLLEGE",
+              "TECH",
+              "SPECIAL",
+              "COUNTRY"
+            ]
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "userId",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "order",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "NAME",
+              "MEMBERS",
+              "GROUP_ID"
+            ]
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "filter",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ALL",
+              "MY"
+            ]
+          },
+          {
+            "name": "includeDiscussion",
+            "in": "query",
+            "description": "includeDiscussion",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "offset",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GroupDiscussionInfo"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/groups/count": {
+      "get": {
+        "tags": [
+          "group-controller"
+        ],
+        "summary": "Get groups count by filters",
+        "operationId": "getGroupsCountUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "CITY",
+              "COMPANY",
+              "COLLEGE",
+              "TECH",
+              "SPECIAL",
+              "COUNTRY"
+            ]
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "userId",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "filter",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ALL",
+              "MY"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/groups/group{KID}": {
+      "get": {
+        "tags": [
+          "group-controller"
+        ],
+        "summary": "Get group by key or id",
+        "operationId": "getGroupInfoUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "KID",
+            "in": "path",
+            "description": "KID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupDiscussionInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/posts": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Get posts by filters",
+        "operationId": "getPostsUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "USUAL",
+              "INNER_LINK",
+              "OUTER_LINK"
+            ]
+          },
+          {
+            "name": "groupKid",
+            "in": "query",
+            "description": "groupKid",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "groupType",
+            "in": "query",
+            "description": "groupType",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "CITY",
+              "COMPANY",
+              "COLLEGE",
+              "TECH",
+              "SPECIAL",
+              "COUNTRY"
+            ]
+          },
+          {
+            "name": "ownerId",
+            "in": "query",
+            "description": "ownerId",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "order",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "NEW",
+              "OLD",
+              "POPULAR"
+            ]
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "filter",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ALL",
+              "MY_GROUPS"
+            ]
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "offset",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PostInfo"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/posts/count": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Get posts count by filters",
+        "operationId": "getPostsCountUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "USUAL",
+              "INNER_LINK",
+              "OUTER_LINK"
+            ]
+          },
+          {
+            "name": "groupKid",
+            "in": "query",
+            "description": "groupKid",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "groupType",
+            "in": "query",
+            "description": "groupType",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "CITY",
+              "COMPANY",
+              "COLLEGE",
+              "TECH",
+              "SPECIAL",
+              "COUNTRY"
+            ]
+          },
+          {
+            "name": "ownerId",
+            "in": "query",
+            "description": "ownerId",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "filter",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "ALL",
+              "MY_GROUPS"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/1.0/rest/posts/post{KID}": {
+      "get": {
+        "tags": [
+          "post-controller"
+        ],
+        "summary": "Get post by key or id",
+        "operationId": "getPostUsingGET",
+        "consumes": [
+          "application/json;charset=UTF-8",
+          "*/*"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;charset=UTF-8"
+        ],
+        "parameters": [
+          {
+            "name": "KID",
+            "in": "path",
+            "description": "KID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostInfo"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthorInfo": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "companyUrl": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "csdnUrl": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "externalEmail": {
+          "type": "string"
+        },
+        "facebookUrl": {
+          "type": "string"
+        },
+        "githubUrl": {
+          "type": "string"
+        },
+        "instagramUrl": {
+          "type": "string"
+        },
+        "job": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "linkedinUrl": {
+          "type": "string"
+        },
+        "mediumUrl": {
+          "type": "string"
+        },
+        "pictureUrl": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "stackoverflowUrl": {
+          "type": "string"
+        },
+        "twitterUrl": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "AuthorInfo"
+    },
+    "BaseUserInfo": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "job": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pictureUrl": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        },
+        "publicStatus": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "BEGINNER",
+            "ACTIVE",
+            "STRONG",
+            "GRADUATED",
+            "INTERNSHIP_IN_PROGRESS",
+            "INTERNSHIP_COMPLETED",
+            "RESUME_COMPLETED",
+            "LOOKING_FOR_JOB",
+            "HAVE_JOB"
+          ]
+        },
+        "publicStatusMessage": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "BaseUserInfo"
+    },
+    "ForumQuestionInfo": {
+      "type": "object",
+      "properties": {
+        "commentsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "key": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "ENGLISH",
+            "GERMAN",
+            "SPANISH",
+            "HINDI",
+            "FRENCH",
+            "PORTUGUESE",
+            "POLISH",
+            "BENGALI",
+            "PUNJABI",
+            "CHINESE",
+            "ITALIAN",
+            "INDONESIAN",
+            "MARATHI",
+            "TAMIL",
+            "TELUGU",
+            "JAPANESE",
+            "KOREAN",
+            "URDU",
+            "TAIWANESE",
+            "NETHERLANDS",
+            "RUSSIAN",
+            "UKRAINIAN"
+          ]
+        },
+        "likesInfo": {
+          "$ref": "#/definitions/LikesInfo"
+        },
+        "rating": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "NEW",
+            "ACTIVE",
+            "SOLVED",
+            "ARCHIVE",
+            "DUPLICATE"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "updatedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userDiscussionInfo": {
+          "$ref": "#/definitions/UserDiscussionInfo"
+        },
+        "userInfo": {
+          "$ref": "#/definitions/BaseUserInfo"
+        },
+        "viewsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "visibilityStatus": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "RESTRICTED",
+            "PUBLIC",
+            "PROTECTED",
+            "PRIVATE",
+            "DISABLED",
+            "DELETED"
+          ]
+        }
+      },
+      "title": "ForumQuestionInfo"
+    },
+    "GroupDiscussionInfo": {
+      "type": "object",
+      "properties": {
+        "avatarUrl": {
+          "type": "string"
+        },
+        "commentsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "key": {
+          "type": "string"
+        },
+        "levelToEditor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "meGroupInfo": {
+          "$ref": "#/definitions/MeGroupInfo"
+        },
+        "pictureUrl": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "CITY",
+            "COMPANY",
+            "COLLEGE",
+            "TECH",
+            "SPECIAL",
+            "COUNTRY"
+          ]
+        },
+        "userDiscussionInfo": {
+          "$ref": "#/definitions/UserDiscussionInfo"
+        },
+        "usersCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "visibilityStatus": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "RESTRICTED",
+            "PUBLIC",
+            "PROTECTED",
+            "PRIVATE",
+            "DISABLED",
+            "DELETED"
+          ]
+        }
+      },
+      "title": "GroupDiscussionInfo"
+    },
+    "GroupInfo": {
+      "type": "object",
+      "properties": {
+        "avatarUrl": {
+          "type": "string"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "key": {
+          "type": "string"
+        },
+        "levelToEditor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "meGroupInfo": {
+          "$ref": "#/definitions/MeGroupInfo"
+        },
+        "pictureUrl": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "CITY",
+            "COMPANY",
+            "COLLEGE",
+            "TECH",
+            "SPECIAL",
+            "COUNTRY"
+          ]
+        },
+        "usersCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "visibilityStatus": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "RESTRICTED",
+            "PUBLIC",
+            "PROTECTED",
+            "PRIVATE",
+            "DISABLED",
+            "DELETED"
+          ]
+        }
+      },
+      "title": "GroupInfo"
+    },
+    "LikesInfo": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "LIKE",
+            "HOT",
+            "FOLLOW",
+            "FAVORITE",
+            "SOLUTION",
+            "HELPFUL",
+            "ARTICLE",
+            "OSCAR",
+            "DISLIKE",
+            "WRONG",
+            "SPAM",
+            "ABUSE",
+            "FOUL",
+            "TROLLING",
+            "OFFTOPIC",
+            "DUPLICATE",
+            "DIRTY",
+            "OUTDATED",
+            "BORING",
+            "UNCLEAR",
+            "HARD",
+            "EASY",
+            "FAKE",
+            "SHAM",
+            "AWFUL"
+          ]
+        }
+      },
+      "title": "LikesInfo"
+    },
+    "MeGroupInfo": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "CANDIDATE",
+            "INVITEE",
+            "MEMBER",
+            "EDITOR",
+            "MODERATOR",
+            "ADMINISTRATOR",
+            "BANNED"
+          ]
+        },
+        "userGroupId": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "MeGroupInfo"
+    },
+    "PostInfo": {
+      "type": "object",
+      "properties": {
+        "authorInfo": {
+          "$ref": "#/definitions/AuthorInfo"
+        },
+        "commentsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "string"
+        },
+        "createdTime": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "groupInfo": {
+          "$ref": "#/definitions/GroupInfo"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "key": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "ENGLISH",
+            "GERMAN",
+            "SPANISH",
+            "HINDI",
+            "FRENCH",
+            "PORTUGUESE",
+            "POLISH",
+            "BENGALI",
+            "PUNJABI",
+            "CHINESE",
+            "ITALIAN",
+            "INDONESIAN",
+            "MARATHI",
+            "TAMIL",
+            "TELUGU",
+            "JAPANESE",
+            "KOREAN",
+            "URDU",
+            "TAIWANESE",
+            "NETHERLANDS",
+            "RUSSIAN",
+            "UKRAINIAN"
+          ]
+        },
+        "likesInfo": {
+          "$ref": "#/definitions/LikesInfo"
+        },
+        "originalGroupInfo": {
+          "$ref": "#/definitions/GroupInfo"
+        },
+        "pictureUrl": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number",
+          "format": "double"
+        },
+        "ratingCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "USUAL",
+            "INNER_LINK",
+            "OUTER_LINK"
+          ]
+        },
+        "updatedTime": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userDiscussionInfo": {
+          "$ref": "#/definitions/UserDiscussionInfo"
+        },
+        "views": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "visibilityStatus": {
+          "type": "string",
+          "enum": [
+            "UNKNOWN",
+            "RESTRICTED",
+            "PUBLIC",
+            "PROTECTED",
+            "PRIVATE",
+            "DISABLED",
+            "DELETED"
+          ]
+        }
+      },
+      "title": "PostInfo"
+    },
+    "UserDiscussionInfo": {
+      "type": "object",
+      "properties": {
+        "isBookmarked": {
+          "type": "boolean"
+        },
+        "lastTime": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "newCommentsCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "UserDiscussionInfo"
+    }
+  }
+}

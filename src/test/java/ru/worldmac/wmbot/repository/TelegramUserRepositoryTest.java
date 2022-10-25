@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
+import ru.worldmac.wmbot.entity.GroupSub;
 import ru.worldmac.wmbot.entity.TelegramUser;
 import ru.worldmac.wmbot.testConfig.TestContainersConfig;
 
@@ -39,5 +40,21 @@ public class TelegramUserRepositoryTest extends TestContainersConfig {
 
         Assertions.assertTrue(saved.isPresent());
         Assertions.assertEquals(user, saved.get());
+    }
+
+    @Sql(scripts = {"/sql/clearDbs.sql", "/sql/fiveGroupSubsForUser.sql"})
+    @Test
+    public void shouldProperlyGetAllGroupSubsForUser() {
+        //when
+        Optional<TelegramUser> userFromDB = telegramUserRepository.findById("1");
+
+        //then
+        Assertions.assertTrue(userFromDB.isPresent());
+        List<GroupSub> groupSubs = userFromDB.get().getGroupSubs();
+        for (int i = 0; i < groupSubs.size(); i++) {
+            Assertions.assertEquals(String.format("g%s", (i + 1)), groupSubs.get(i).getTitle());
+            Assertions.assertEquals(i + 1, groupSubs.get(i).getId());
+            Assertions.assertEquals(i + 1, groupSubs.get(i).getLastArticleId());
+        }
     }
 }

@@ -26,6 +26,7 @@ public class SendMessageServiceImpl implements SendMessageService {
         sm.setText(message);
         sm.enableHtml(true);
 
+
         try {
             wmBot.execute(sm);
 //            log.info(sm.getText());
