@@ -11,5 +11,5 @@ import java.util.List;
  */
 @Repository
 public interface TelegramUserRepository extends JpaRepository<TelegramUser, String> {
-    List<TelegramUser> findAllByActiveTrue();
+    List<TelegramUser> findAllByIsActiveTrue();
 }

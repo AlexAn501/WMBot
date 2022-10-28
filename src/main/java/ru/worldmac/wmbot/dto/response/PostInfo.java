@@ -1,5 +1,6 @@
 package ru.worldmac.wmbot.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -7,6 +8,7 @@ import ru.worldmac.wmbot.dto.AuthorInfo;
 import ru.worldmac.wmbot.dto.LikesInfo;
 import ru.worldmac.wmbot.dto.UserDiscussionInfo;
 import ru.worldmac.wmbot.dto.enums.LanguageEnum;
+import ru.worldmac.wmbot.dto.enums.PostTypeEnum;
 
 /**
  * Post info DTO class.
@@ -24,7 +26,10 @@ public class PostInfo extends Info {
     private GroupInfo originalGroupInfo;
     private Double rating;
     private Integer ratingCount;
-    private Integer updatedTime;
+    private Long updatedTime;
     private UserDiscussionInfo userDiscussionInfo;
     private Integer views;
+    @JsonProperty("type")
+    private PostTypeEnum postType;
+    private Long createdTime;
 }

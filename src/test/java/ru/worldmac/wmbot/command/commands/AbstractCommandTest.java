@@ -3,6 +3,7 @@ package ru.worldmac.wmbot.command.commands;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -38,9 +39,13 @@ public abstract class AbstractCommandTest {
 
         Update update = new Update();
         Message message = Mockito.mock(Message.class);
-        Mockito.when(message.getChatId()).thenReturn(chatId);
-        Mockito.when(message.getText()).thenReturn(getCommandName());
+        Chat chatInfo = Mockito.mock(Chat.class);
         update.setMessage(message);
+
+        Mockito.when(chatInfo.getId()).thenReturn(chatId);
+        Mockito.when(message.getText()).thenReturn(getCommandName());
+        Mockito.when(update.getMessage().getChat()).thenReturn(chatInfo);
+        Mockito.when(update.getMessage().getChatId()).thenReturn(chatId);
 
         SendMessage sm = new SendMessage();
         sm.setChatId(chatId.toString());

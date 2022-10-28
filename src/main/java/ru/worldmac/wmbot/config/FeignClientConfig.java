@@ -11,14 +11,14 @@ public class FeignClientConfig {
     @Bean
     public JRPostsClient jRPostsClient() {
         final String jrUrl = "https://javarush.ru/api/1.0/rest/posts";
-        JRPostsClient jrPostsClient = FeignClientConfigBuilder.feignBuildJson(JRPostsClient.class, jrUrl);
+        var jrPostsClient = FeignClientConfigBuilder.feignBuildJson(JRPostsClient.class, jrUrl);
         return jrPostsClient;
     }
 
     @Bean
     public JRGroupClient jrGroupClient() {
         final String jrUrl = "https://javarush.ru/api/1.0/rest/groups";
-        JRGroupClient jrGroupClient = FeignClientConfigBuilder.feignBuildJson(JRGroupClient.class, jrUrl);
+        var jrGroupClient = FeignClientConfigBuilder.feignBuildJson(JRGroupClient.class, jrUrl);
         return jrGroupClient;
     }
 }
