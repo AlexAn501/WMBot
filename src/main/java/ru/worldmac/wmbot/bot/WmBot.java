@@ -30,7 +30,7 @@ public class WmBot extends TelegramLongPollingBot {
 
     public WmBot(TelegramUserService telegramUserService, JRPostsClient jrPostsClient, JRGroupClient jrGroupClient) {
         this.commandContainer = new CommandContainer(new SendMessageServiceImpl(this),
-                telegramUserService, jrPostsClient, jrGroupClient);
+                telegramUserService);
     }
 
     @Override

@@ -112,30 +112,6 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.openapitools</groupId>-->
-<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                <version>5.0.0-beta2</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>JRClient Open API code generation</id>-->
-<!--                        <goals>-->
-<!--                            <goal>generate</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <inputSpec>${project.basedir}/src/main/resources/feignJson/JavaRushJson.json</inputSpec>-->
-<!--                            <generatorName>spring</generatorName>-->
-<!--                            <apiPackage>ru.worldmac.wmbot.api</apiPackage>-->
-<!--                            <modelPackage>ru.worldmac.wmbot.model</modelPackage>-->
-<!--                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>-->
-<!--                            <configOptions>-->
-<!--                                <openApiNullable>false</openApiNullable>-->
-<!--                                <delegatePattern>true</delegatePattern>-->
-<!--                            </configOptions>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

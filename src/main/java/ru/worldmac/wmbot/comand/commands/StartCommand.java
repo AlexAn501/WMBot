@@ -26,18 +26,12 @@ public class StartCommand implements Command {
 
     private final SendMessageService sendMessageService;
     private final TelegramUserService telegramUserService;
-    private final JRPostsClient jrPostsClient;
-    private final JRGroupClient jrGroupClient;
 
     public final static String START_MESSAGE = "Привет, я бот WorldMac. Я помогу тебе в поиске техники";
 
-    public StartCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService,
-                        JRPostsClient jrPostsClient,
-                        JRGroupClient jrGroupClient) {
+    public StartCommand(SendMessageService sendMessageService, TelegramUserService telegramUserService) {
         this.sendMessageService = sendMessageService;
         this.telegramUserService = telegramUserService;
-        this.jrPostsClient = jrPostsClient;
-        this.jrGroupClient = jrGroupClient;
     }
 
     @Override
@@ -57,33 +51,6 @@ public class StartCommand implements Command {
                     telegramUserService.save(telegramUser);
                 }
         );
-
-        GroupRequestFilter args = GroupRequestFilter.builder()
-                .type(GroupTypeEnum.TECH)
-                .limit(2)
-                .build();
-        List<GroupDiscussionInfo> groupDiscussionByFilter = jrGroupClient.getGroupDiscussionByFilter(args);
-
-        GroupsCountRequestFilter countFilter = GroupsCountRequestFilter.builder()
-                .type(GroupTypeEnum.TECH)
-                .build();
-        Integer groupCount = jrGroupClient.getGroupCount(countFilter);
-
-        GroupDiscussionInfo groupById = jrGroupClient.getGroupById("26");
-
-        PostsRequestFilter postFilter = PostsRequestFilter.builder()
-                .offset(3)
-                .limit(3)
-                .build();
-        List<PostInfo> postsByFilter = jrPostsClient.getPostsByFilter(postFilter);
-
-        PostInfo postById = jrPostsClient.getPostById("2");
-
-        PostCountRequestFilter postCountFilter = PostCountRequestFilter.builder()
-                .type(PostTypeEnum.INNER_LINK)
-                .build();
-        Integer postCount = jrPostsClient.getPostCount(postCountFilter);
-
 
         sendMessageService.sendMessage(chatInfo.getId().toString(), START_MESSAGE);
     }

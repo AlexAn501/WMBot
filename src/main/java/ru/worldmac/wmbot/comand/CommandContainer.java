@@ -22,11 +22,10 @@ public class CommandContainer {
     private final ImmutableMap<String, Command> commandMap;
     private final Command unknownCommand;
 
-    public CommandContainer(SendMessageService sendMessageService, TelegramUserService telegramUserService,
-                            JRPostsClient jrPostsClient, JRGroupClient jrGroupClient) {
+    public CommandContainer(SendMessageService sendMessageService, TelegramUserService telegramUserService) {
         commandMap = ImmutableMap.<String, Command>builder()
                 .put(CommandName.START.getCommandName(),
-                        new StartCommand(sendMessageService, telegramUserService, jrPostsClient, jrGroupClient))
+                        new StartCommand(sendMessageService, telegramUserService))
                 .put(CommandName.STOP.getCommandName(), new StopCommand(sendMessageService, telegramUserService))
                 .put(CommandName.LIST.getCommandName(), new ListCommand(sendMessageService))
                 .put(CommandName.HELP.getCommandName(), new HelpCommand(sendMessageService))
