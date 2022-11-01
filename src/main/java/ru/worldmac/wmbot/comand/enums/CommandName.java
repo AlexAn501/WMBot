@@ -11,6 +11,7 @@ public enum CommandName {
     LIST("/list"),
     HELP("/help"),
     STAT("/stat"),
+    ADD_GROUP_SUB("/addgroup"),
     NO("nocommand");
 
     CommandName(String commandName) {
