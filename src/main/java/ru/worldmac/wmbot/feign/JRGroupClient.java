@@ -9,7 +9,6 @@ import ru.worldmac.wmbot.dto.request.GroupsCountRequestFilter;
 import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Client for Javarush Open API corresponds to Groups.
@@ -31,7 +30,7 @@ public interface JRGroupClient {
 
     @RequestLine("GET ")
     @Headers("Content-Type: application/json")
-    List<GroupDiscussionInfo> getGroupDiscussionByFilter(@QueryMap Map<String, Object> args);
+    List<GroupDiscussionInfo> getGroupDiscussionByFilter(@QueryMap GroupRequestFilter args);
 
     /**
      * Get count of groups filtered by provided {@link GroupsCountRequestFilter}.
@@ -48,7 +47,7 @@ public interface JRGroupClient {
 
     @RequestLine("GET /count")
     @Headers("Content-Type: application/json")
-    Integer getGroupCount(@QueryMap Map<String, Object> countRequestArgs);
+    Integer getGroupCount(@QueryMap GroupsCountRequestFilter countRequestArgs);
 
     /**
      * Get {@link GroupDiscussionInfo} by provided ID.

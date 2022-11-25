@@ -1,7 +1,8 @@
-package ru.worldmac.wmbot.comand.commands;
+package ru.worldmac.wmbot.command.commands;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.worldmac.wmbot.comand.Command;
+import ru.worldmac.wmbot.command.Command;
+import ru.worldmac.wmbot.command.CommandUtils;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.TelegramUserService;
 
@@ -23,7 +24,7 @@ public class StopCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        String chatId = update.getMessage().getChatId().toString();
+        var chatId = CommandUtils.getChatId(update);
         sendMessageService.sendMessage(chatId, STOP_MESSAGE);
 
         telegramUserService.findByChatId(chatId).ifPresent(

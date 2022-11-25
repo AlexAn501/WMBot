@@ -1,9 +1,8 @@
 package ru.worldmac.wmbot.command.commands;
 
 import org.junit.jupiter.api.DisplayName;
-import ru.worldmac.wmbot.comand.Command;
-import ru.worldmac.wmbot.comand.commands.StartCommand;
-import ru.worldmac.wmbot.comand.enums.CommandName;
+import ru.worldmac.wmbot.command.Command;
+import ru.worldmac.wmbot.command.enums.CommandName;
 
 @DisplayName("Unit-level testing for StartCommand")
 public class StartCommandTest extends AbstractCommandTest{
@@ -19,6 +18,6 @@ public class StartCommandTest extends AbstractCommandTest{
 
     @Override
     Command getCommand() {
-        return new StartCommand(sendMessageService, telegramUserService, jrPostsClient, jrGroupClient);
+        return new StartCommand(sendMessageService, telegramUserService);
     }
 }
