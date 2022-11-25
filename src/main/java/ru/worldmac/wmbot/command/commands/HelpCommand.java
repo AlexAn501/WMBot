@@ -1,8 +1,9 @@
-package ru.worldmac.wmbot.comand.commands;
+package ru.worldmac.wmbot.command.commands;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.worldmac.wmbot.comand.Command;
-import ru.worldmac.wmbot.comand.enums.CommandName;
+import ru.worldmac.wmbot.command.Command;
+import ru.worldmac.wmbot.command.CommandUtils;
+import ru.worldmac.wmbot.command.enums.CommandName;
 import ru.worldmac.wmbot.service.SendMessageService;
 
 /**
@@ -27,7 +28,7 @@ public class HelpCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        String chatId = update.getMessage().getChatId().toString();
+        var chatId = CommandUtils.getChatId(update);
         sendMessageService.sendMessage(chatId, HELP_MESSAGE);
     }
 }

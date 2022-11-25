@@ -1,8 +1,7 @@
 package ru.worldmac.wmbot.command.commands;
 
 import org.junit.jupiter.api.DisplayName;
-import ru.worldmac.wmbot.comand.Command;
-import ru.worldmac.wmbot.comand.commands.UnknownCommand;
+import ru.worldmac.wmbot.command.Command;
 
 @DisplayName("Unit-level testing for UnknownCommand")
 public class UnknownCommandTest extends AbstractCommandTest{

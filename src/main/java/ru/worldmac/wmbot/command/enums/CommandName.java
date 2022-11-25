@@ -1,4 +1,4 @@
-package ru.worldmac.wmbot.comand.enums;
+package ru.worldmac.wmbot.command.enums;
 
 
 /**
@@ -12,6 +12,7 @@ public enum CommandName {
     HELP("/help"),
     STAT("/stat"),
     ADD_GROUP_SUB("/addgroup"),
+    LIST_GROUP_SUB("/listgroup"),
     NO("nocommand");
 
     CommandName(String commandName) {

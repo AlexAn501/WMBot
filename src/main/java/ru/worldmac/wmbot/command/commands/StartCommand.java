@@ -1,23 +1,12 @@
-package ru.worldmac.wmbot.comand.commands;
+package ru.worldmac.wmbot.command.commands;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.worldmac.wmbot.comand.Command;
-import ru.worldmac.wmbot.dto.enums.GroupTypeEnum;
-import ru.worldmac.wmbot.dto.enums.PostTypeEnum;
-import ru.worldmac.wmbot.dto.request.GroupRequestFilter;
-import ru.worldmac.wmbot.dto.request.GroupsCountRequestFilter;
-import ru.worldmac.wmbot.dto.request.PostCountRequestFilter;
-import ru.worldmac.wmbot.dto.request.PostsRequestFilter;
-import ru.worldmac.wmbot.dto.response.GroupDiscussionInfo;
-import ru.worldmac.wmbot.dto.response.PostInfo;
+import ru.worldmac.wmbot.command.Command;
+import ru.worldmac.wmbot.command.CommandUtils;
 import ru.worldmac.wmbot.entity.TelegramUser;
-import ru.worldmac.wmbot.feign.JRGroupClient;
-import ru.worldmac.wmbot.feign.JRPostsClient;
 import ru.worldmac.wmbot.service.SendMessageService;
 import ru.worldmac.wmbot.service.TelegramUserService;
 import ru.worldmac.wmbot.utils.Mapper;
-
-import java.util.List;
 
 /**
  * Start {@link Command}.
@@ -36,7 +25,7 @@ public class StartCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        var chatInfo = update.getMessage().getChat();
+        var chatInfo = CommandUtils.getChat(update);
 
         telegramUserService.findByChatId(chatInfo.getId().toString()).ifPresentOrElse(
                 user -> {

@@ -1,4 +1,4 @@
-package ru.worldmac.wmbot.comand;
+package ru.worldmac.wmbot.command;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
 

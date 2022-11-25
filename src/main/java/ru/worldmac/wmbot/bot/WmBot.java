@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.worldmac.wmbot.comand.CommandContainer;
+import ru.worldmac.wmbot.command.CommandContainer;
 import ru.worldmac.wmbot.feign.JRGroupClient;
 import ru.worldmac.wmbot.feign.JRPostsClient;
 import ru.worldmac.wmbot.service.GroupSubService;
 import ru.worldmac.wmbot.service.SendMessageServiceImpl;
 import ru.worldmac.wmbot.service.TelegramUserService;
 
-import static ru.worldmac.wmbot.comand.enums.CommandName.NO;
+import static ru.worldmac.wmbot.command.enums.CommandName.NO;
 
 /**
  * Telegram bot for WorldMac.

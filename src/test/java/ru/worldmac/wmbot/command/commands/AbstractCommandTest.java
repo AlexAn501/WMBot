@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.worldmac.wmbot.bot.WmBot;
-import ru.worldmac.wmbot.comand.Command;
+import ru.worldmac.wmbot.command.Command;
 import ru.worldmac.wmbot.feign.JRGroupClient;
 import ru.worldmac.wmbot.feign.JRPostsClient;
 import ru.worldmac.wmbot.service.SendMessageService;
